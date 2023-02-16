@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-
+    //a bool to check if the character is selected
+    public bool selected = false;
     private Vector3 target = new Vector3(0, 0, 0);
     private float maxSpeed = 0.3f;
     private float startSpeed = 0.05f;
     private float waittime = 25f;
     private float timer = 0;
+
+    //a refrence to the panel in canvas in this prefab
+    [SerializeField] private GameObject panel;
 
     //a reference to the bool walking in the animator
     private Animator animator;
@@ -39,11 +43,7 @@ public class AI : MonoBehaviour
         float distance = Vector2.Distance(transform.position, target);
         float speed = Mathf.Lerp(startSpeed, maxSpeed, Mathf.Min(1f, timer / 10f));
         transform.position = Vector2.Lerp(transform.position, target, speed * Time.deltaTime);
-    }
 
-    //if position close to target, set walking to false
-    private void LateUpdate()
-    {
         if (Vector2.Distance(transform.position, target) < 0.5f)
         {
             animator.SetBool("walking", false);
@@ -52,6 +52,19 @@ public class AI : MonoBehaviour
         {
             animator.SetBool("walking", true);
         }
+        if (selected == true)
+        {
+            //the panel will be active
+            panel.SetActive(true);
+
+        }
+        else
+        {
+            //the panel will be inactive
+            panel.SetActive(false);
+        }
+
     }
+
 
 }

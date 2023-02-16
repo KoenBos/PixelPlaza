@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-//update is called once per frame
     void Update()
     {
+        //is there is a character selected the camera will not move and will follow the character and zoom in and out with the character
+        foreach (GameObject character in GameObject.Find("Spawner").GetComponent<Spawner>().characters)
+        {
+            if (character.GetComponent<AI>().selected == true)
+            {
+                //the camera will follow the character with a lerping effect
+                transform.position = Vector3.Lerp(transform.position, new Vector3(character.transform.position.x, character.transform.position.y, -10), Time.deltaTime * 2);
+                //the camera will zoom in and out with the character with a lerping effect without a maxspeed
+                GetComponent<Camera>().orthographicSize = Mathf.Lerp(GetComponent<Camera>().orthographicSize, 3f, Time.deltaTime * 1);
+            }
+        }
         //if the mouse is pressed down and moved the camera will move with the mouse movement based on the orthographic size of the camera
         if (Input.GetMouseButton(0))
         {
