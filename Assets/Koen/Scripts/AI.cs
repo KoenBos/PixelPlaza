@@ -37,7 +37,7 @@ public class AI : MonoBehaviour
         if (timer > waittime)
         {
             timer = 0;
-            target = new Vector3(Random.Range(-8, 8), Random.Range(-5, 5), 0);
+            target = new Vector3(Random.Range(-22, 22), Random.Range(-13, 13), 0);
         }
         
         float distance = Vector2.Distance(transform.position, target);
