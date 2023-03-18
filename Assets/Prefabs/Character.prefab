@@ -308,8 +308,7 @@ MonoBehaviour:
     massa placerat duis ultricies lacus sed. Morbi leo urna molestie at elementum
     eu facilisis sed. Etiam erat velit scelerisque in dictum non consectetur a erat.
     Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. At in tellus
-    integer feugiat scelerisque varius morbi enim nunc. Non odio euismod lacinia
-    at quis risus sed. Condimentum mattis pellentesque id nibh tortor id aliquet.'
+    integer feugiat scelerisque.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -439,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40503737, g: 0.7735849, b: 0.48531568, a: 1}
+  m_Color: {r: 0.8070043, g: 0.8773585, b: 0.8227217, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
