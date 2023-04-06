@@ -24,6 +24,9 @@ public class AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //dont collide with other characters
+        Physics2D.IgnoreLayerCollision(3, 3, true);
+
         animator = GetComponent<Animator>();
         timer = Random.Range(0, 25);
         waittime = Random.Range(25, 30);
@@ -37,7 +40,12 @@ public class AI : MonoBehaviour
         if (timer > waittime)
         {
             timer = 0;
-            target = new Vector3(Random.Range(-22, 22), Random.Range(-13, 13), 0);
+            target = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 5, transform.position.y + 5), 0);
+            if  (target.x > 15 || target.x < -15 || target.y > 15 || target.y < -15)
+            {
+                //log outside of the map
+                Debug.Log("outside of the map");
+            }
         }
         
         float distance = Vector2.Distance(transform.position, target);
