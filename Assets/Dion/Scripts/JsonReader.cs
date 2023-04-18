@@ -9,6 +9,7 @@ public class JsonReader : MonoBehaviour
 {
     //Text object
     [SerializeField] private TextMeshProUGUI textbox;
+    [SerializeField] private GameObject AICharacterPrefab;
 
     // The C# object to deserialize the JSON data into
     [System.Serializable]
@@ -68,12 +69,38 @@ public class JsonReader : MonoBehaviour
                     foreach (CharacterData character in characters.characterArray)
                     {
                         textbox.text += "ID: " + character.ID + ", First Name: " + character.firstname + ", Last Name: " + character.lastname + ", Cohort: " + character.cohort + ", Portfolio Link: " + character.portfoliolink + ", Character Sprite: " + character.charactersprite + ", Walking Sprite Sheet: " + character.walkingspritesheet + "\n";
+                        
+                        // Spawn the AI character prefab
+                        GameObject aiCharacter = Instantiate(Resources.Load<GameObject>("AICharacterPrefab"));
+
+                        // Set the position of the AI character
+                        aiCharacter.transform.position = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
+
+                        // Load the character sprite using UnityWebRequestTexture
+                        UnityWebRequest spriteRequest = UnityWebRequestTexture.GetTexture(character.charactersprite);
+
+                        // Wait for the request to complete
+                        yield return spriteRequest.SendWebRequest();
+
+                        if (spriteRequest.result != UnityWebRequest.Result.Success)
+                        {
+                            Debug.LogError("Failed to load character sprite: " + spriteRequest.error);
+                        }
+                        else
+                        {
+                            // Set the sprite of the AI character based on the downloaded texture
+                            aiCharacter.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                                ((DownloadHandlerTexture)spriteRequest.downloadHandler).texture,
+                                new Rect(0, 0, ((DownloadHandlerTexture)spriteRequest.downloadHandler).texture.width, ((DownloadHandlerTexture)spriteRequest.downloadHandler).texture.height),
+                                new Vector2(0.5f, 0.5f)
+                            );
+                        }
+
+                        // Set the name of the AI character
+                        aiCharacter.name = character.firstname + " " + character.lastname;
                     }
                     break;
             }
         }
     }
 }
-
-
-
