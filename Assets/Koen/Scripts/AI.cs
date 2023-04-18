@@ -40,8 +40,13 @@ public class AI : MonoBehaviour
         if (timer > waittime)
         {
             timer = 0;
-            target = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 5, transform.position.y + 5), 0);
-            if  (target.x > 15 || target.x < -15 || target.y > 15 || target.y < -15)
+            target = new Vector3(Random.Range(transform.position.x - 4, transform.position.x + 4), Random.Range(transform.position.y - 4, transform.position.y + 4), 0);
+            while(target.x > 10.2 || target.x < -10.2 || target.y > 10.2 || target.y < -10.2){
+                Debug.Log("Making new target");
+                target = new Vector3(Random.Range(transform.position.x - 4, transform.position.x + 4), Random.Range(transform.position.y - 4, transform.position.y + 4), 0);
+            }
+
+            if  (target.x > 10.2 || target.x < -10.2 || target.y > 10.2 || target.y < -10.2)
             {
                 //log outside of the map
                 Debug.Log("outside of the map");
